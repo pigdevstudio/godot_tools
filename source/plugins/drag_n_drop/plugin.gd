@@ -55,9 +55,17 @@ func _input(event):
 	var data = get_viewport().gui_get_drag_data()
 	if not data:
 		return
-	var path = get_editor_interface().get_edited_scene_root().get_path_to(data.object)
-	var text = "$%s.%s"%[path, data.property]
+	
+	var text = ""
+	
+	if data.object == get_editor_interface().get_edited_scene_root():
+		text = data.property
+	else:
+		var path = get_editor_interface().get_edited_scene_root().get_path_to(data.object)
+		text = "$%s.%s"%[path, data.property]
+	
 	if Input.is_key_pressed(KEY_SHIFT):
 		text = text + " = "
+
 	current_text_edit.insert_text_at_cursor(text)
 	emit_signal("dropped")
