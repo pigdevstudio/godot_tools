@@ -30,8 +30,8 @@ func _show_color(text_edit):
 		return
 	
 	var picker = load("res://addons/code_color_pick/interface.tscn").instance()
-	add_child(picker)
-	picker.rect_position = get_viewport().get_mouse_position()
+	text_edit.add_child(picker)
+	picker.rect_position = text_edit.get_local_mouse_position()
 	
 	yield(picker.get_node("Button"), "button_up")
 	text_edit.insert_text_at_cursor("(" + str(picker.color) + ")")
