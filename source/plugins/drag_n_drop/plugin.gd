@@ -55,7 +55,12 @@ func _input(event):
 	var data = get_viewport().gui_get_drag_data()
 	if not data:
 		return
-	
+	if data.type == "obj_property":
+		_drop_property(data)
+	elif data.type == "nodes":
+		_drop_node(data)
+
+func _drop_property(data):
 	var text = ""
 	
 	if data.object == get_editor_interface().get_edited_scene_root():
@@ -68,4 +73,18 @@ func _input(event):
 		text = text + " = "
 
 	current_text_edit.insert_text_at_cursor(text)
+	emit_signal("dropped")
+
+func _drop_node(data):
+	var text = ""
+	var nodes = get_editor_interface().get_selection().get_selected_nodes()
+	for n in nodes:
+		var path = get_editor_interface().get_edited_scene_root().get_path_to(n)
+		if Input.is_key_pressed(KEY_SHIFT):
+			text = 'onready var %s = get_node("%s")\n'%[n.name.to_lower(), path]
+			current_text_edit.insert_text_at_cursor(text)
+		else:
+			text = 'get_node("%s")'%[path]
+			current_text_edit.insert_text_at_cursor(text)
+			break
 	emit_signal("dropped")
