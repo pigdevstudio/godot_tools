@@ -14,10 +14,10 @@ func _on_selection_changed():
 
 func _input(event):
 	if Input.is_key_pressed(KEY_F12):
-		var r = load("res://addons/batch_rename/rename.tscn").instance()
+		var r = load("res://addons/batch_rename/interface.tscn").instance()
 		r.get_node("LineEdit").connect("text_entered", self,
 				"_on_text_entered", [r])
-		add_child(r)
+		get_editor_interface().get_base_control().add_child(r)
 		
 func _on_text_entered(new_text, interface):
 	var nodes = get_editor_interface().get_selection().get_selected_nodes()
