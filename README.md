@@ -1,2 +1,2 @@
-# godot_tools
-A set of GDScript EditorScript tools that automate boring tasks on Godot Engine.
+# Pigdev's Godot Tools
+A set of GDScript tools and plugins that helps you improve your workflow in Godot Engine
