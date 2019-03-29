@@ -12,19 +12,21 @@ func _ready():
 	update()
 	
 func _draw():
+	var offset_position = Vector2(0, 0)
+	 
 	if shape is CircleShape2D:
-		draw_circle(global_position - position, shape.radius, color)
+		draw_circle(offset_position, shape.radius, color)
 	elif shape is RectangleShape2D:
-		var rect = Rect2(global_position - position - shape.extents, shape.extents * 2.0)
+		var rect = Rect2(offset_position - shape.extents, shape.extents * 2.0)
 		draw_rect(rect, color)
 	elif shape is CapsuleShape2D:
-		var upper_circle_position = global_position - position + Vector2(0, shape.height * 0.5)
+		var upper_circle_position = offset_position + Vector2(0, shape.height * 0.5)
 		draw_circle(upper_circle_position, shape.radius, color)
 		
-		var lower_circle_position = global_position - position - Vector2(0, shape.height * 0.5)
+		var lower_circle_position = offset_position - Vector2(0, shape.height * 0.5)
 		draw_circle(lower_circle_position, shape.radius, color)
 		
-		var rect_position = global_position - position - Vector2(shape.radius, shape.height * 0.5)
+		var rect_position = offset_position - Vector2(shape.radius, shape.height * 0.5)
 		var rect = Rect2(rect_position, Vector2(shape.radius * 2, shape.height))
 		draw_rect(rect, color)
 
