@@ -8,9 +8,6 @@ func set_color(new_color):
 	color = new_color
 	update()
 
-func _ready():
-	update()
-	
 func _draw():
 	var offset_position = Vector2(0, 0)
 	 
@@ -29,6 +26,3 @@ func _draw():
 		var rect_position = offset_position - Vector2(shape.radius, shape.height * 0.5)
 		var rect = Rect2(rect_position, Vector2(shape.radius * 2, shape.height))
 		draw_rect(rect, color)
-
-func _on_draw():
-	update()
