@@ -15,7 +15,7 @@ func _run() -> void:
 			print("An error occurred when trying to create the bundle folder.")
 	else:
 		print("An error occurred when trying to access the path.")
-	
+
 
 func bundle(current_path: String, target_path: String) -> void:
 	var file: = File.new()
